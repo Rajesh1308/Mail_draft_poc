@@ -8,9 +8,13 @@ from googleapiclient.discovery import build
 from google.oauth2.credentials import Credentials
 from flask_session import Session
 from waitress import serve
+from werkzeug.middleware.proxy_fix import ProxyFix
+
 
 app = Flask(__name__)
-app.secret_key = 'your-very-secret-key'  # Replace in production
+app.secret_key = 'jhhvuvv6rt968fy68f6rf5-bjvuogvotufd54245756ft57f56d8d'  # Replace in production
+
+app.wsgi_app = ProxyFix(app.wsgi_app, x_proto=1, x_host=1)
 
 # Use filesystem sessions (or use Redis/DB in production)
 app.config['SESSION_TYPE'] = 'filesystem'
